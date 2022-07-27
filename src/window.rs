@@ -357,7 +357,7 @@ const DEFAULT_FONT_STR: &'static str =
 impl Window {
     /// Load the image at the path you specify.
     pub fn load_image_from_file(&self, filename: &Path) -> Result<Image, String> {
-        let mut texture = try!(self.canvas.texture_creator().load_texture(&filename));
+        let mut texture = self.canvas.texture_creator().load_texture(&filename)?;
         texture.set_blend_mode(render::BlendMode::Blend);
         Ok(Image {
             width: texture.query().width,
@@ -370,8 +370,8 @@ impl Window {
     /// used in conjunction with the `include_bytes` macro that embeds data in the compiled
     /// executable. In this way, you can pack all of your game data into your executable.
     pub fn load_image(&self, data: &[u8]) -> Result<Image, String> {
-        let rwops = try!(rwops::RWops::from_bytes(data));
-        let surf: surface::Surface = try!(rwops.load());
+        let rwops = rwops::RWops::from_bytes(data)?;
+        let surf: surface::Surface = rwops.load()?;
         let mut texture = match self
             .canvas
             .texture_creator()
@@ -461,7 +461,7 @@ impl Window {
 
     /// Load a Font from the hard drive. See the documentation on `Font` for details.
     pub fn load_font_from_file(&self, filename: &Path, string: String) -> Result<Font, String> {
-        let surf: surface::Surface = try!(LoadSurface::from_file(filename));
+        let surf: surface::Surface = LoadSurface::from_file(filename)?;
         self.parse_image_font(surf, string)
     }
 
@@ -469,8 +469,8 @@ impl Window {
     /// function is particularly powerful when used in conjunction with the `include_bytes` macro
     /// that embeds data in the compiled executable.
     pub fn load_font(&self, data: &[u8], string: String) -> Result<Font, String> {
-        let rwops = try!(rwops::RWops::from_bytes(data));
-        let surf: surface::Surface = try!(rwops.load());
+        let rwops = rwops::RWops::from_bytes(data)?;
+        let surf: surface::Surface = rwops.load()?;
         self.parse_image_font(surf, string)
     }
 }

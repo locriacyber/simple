@@ -2,7 +2,7 @@
 [package]
 name = "simple"
 description = "The simplest graphics library, inspired by LOVE2D"
-version = "0.3.0"
+version = "0.3.1"
 repository = "https://github.com/alexandercampbell/simple"
 keywords = ["simple","graphics","2D"]
 authors = ["Alexander Campbell <alexanderhcampbell@gmail.com>"]
@@ -14,12 +14,12 @@ name = "simple"
 path = "src/lib.rs"
 
 [dependencies]
-libc = "0.1.8"
-rand = "0.3.8"
-num = "0.1.24"
+libc = "0.2.126"
+rand = "0.8.5"
+num = "0.4.0"
 
 [dependencies.sdl2]
-version = "0.32.1"
+version = "0.35.2"
 default-features = false
 features = ["image", "unsafe_textures"]
 
